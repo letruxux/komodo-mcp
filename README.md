@@ -9,7 +9,7 @@ Built with [FastMCP](https://github.com/PrefectHQ/fastmcp), uvicorn, and httpx.
 ```yaml
 services:
   komodo-mcp:
-    image: ghcr.io/myrikld/komodo-mcp:latest
+    image: ghcr.io/letruxux/komodo-mcp:latest
     ports:
       - "8000:8000"
     environment:
