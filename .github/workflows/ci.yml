@@ -57,3 +57,4 @@ jobs:
             ${{ env.IMAGE }}:${{ env.SHA_SHORT }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          platforms: linux/arm64
