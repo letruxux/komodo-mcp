@@ -34,7 +34,7 @@ class KomodoClient:
         return response.json()
 
     async def new_read(self, operation: str, params: dict[str, Any]) -> Any:
-        return await self._new_request("/read", operation, params)
+        return await self._new_request("/read", operation, params or {})
 
     async def read(self, operation: str, params: dict[str, Any] | None = None) -> Any:
         return await self._request("/read", operation, params or {})

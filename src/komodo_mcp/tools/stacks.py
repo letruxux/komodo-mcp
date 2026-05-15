@@ -35,11 +35,16 @@ async def get_stack(
 
 
 @mcp.tool(annotations={"readOnlyHint": True, "openWorldHint": False})
-async def get_stack_log(stack: str, komodo: KomodoClient = KomodoDep) -> Any:
+async def get_stack_log(
+    stack: str,
+    tail: Annotated[int, Field(description="Number of lines to return from the end of logs.")] = 100,
+    timestamps: Annotated[bool, Field(description="Include timestamps in log output.")] = False,
+    komodo: KomodoClient = KomodoDep,
+) -> Any:
     """Get logs for a stack (all services combined, no per-service filtering)."""
     return await komodo.new_read(
         "GetStackLog",
-        {"stack": stack, "tail": 100, "timestamps": False, "services": []},
+        {"stack": stack, "tail": tail, "timestamps": timestamps, "services": []},
     )
 
 
