@@ -23,6 +23,19 @@ class KomodoClient:
         response.raise_for_status()
         return response.json()
 
+    async def _new_request(
+        self, endpoint: str, operation: str, params: dict[str, Any]
+    ) -> Any:
+        response = await self._client.post(
+            f"{endpoint}/{operation}",
+            json=params,
+        )
+        response.raise_for_status()
+        return response.json()
+
+    async def new_read(self, operation: str, params: dict[str, Any]) -> Any:
+        return await self._new_request("/read", operation, params)
+
     async def read(self, operation: str, params: dict[str, Any] | None = None) -> Any:
         return await self._request("/read", operation, params or {})
 

@@ -37,7 +37,10 @@ async def get_stack(
 @mcp.tool(annotations={"readOnlyHint": True, "openWorldHint": False})
 async def get_stack_log(stack: str, komodo: KomodoClient = KomodoDep) -> Any:
     """Get logs for a stack (all services combined, no per-service filtering)."""
-    return await komodo.read("GetStackLog", {"stack": stack})
+    return await komodo.new_read(
+        "GetStackLog",
+        {"stack": stack, "tail": 100, "timestamps": False, "services": []},
+    )
 
 
 @mcp.tool(annotations={"destructiveHint": False, "openWorldHint": False})
